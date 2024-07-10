@@ -7,11 +7,13 @@
     // const bgm2 = document.getElementById("bgm-2");
     // const bgm3 = document.getElementById("bgm-3");
     const congratsMessage = document.getElementById("congrats-message");
+    const quizContainer = document.getElementById("quiz-container");
 
     const clickHandler = () => {
         $counter.textContent = 0;
         body.classList.remove('dark-theme');
         congratsMessage.style.display = "none";
+        quizContainer.style.display = "none";
         stopBgm();
         stopFanfare();
         playMario();
