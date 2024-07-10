@@ -1,0 +1,92 @@
+h1 {
+    text-align: center;
+}
+
+#congrats-message {
+    font-size: 24px;
+    color: #ff0000;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.counter {
+    text-align: center;
+    padding: 20px;
+    border: 2px solid #000;
+}
+
+.counter-number {
+    font-size: 50px;
+    margin-bottom: 10px;
+}
+
+.button {
+    font-size: 20px;
+    padding: 10px 20px;
+    border: 0;
+    background-color: #000;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 5px;
+    margin: 0 5px;
+}
+
+#sound-toggle {
+    font-size: 15px;
+}
+
+.button:hover {
+    opacity: 0.8;
+    transition: opacity .25s;
+}
+
+body {
+  background-color: #ffffff;
+  color: #000000;
+  transition: all 0.3s ease;
+}
+
+button {
+  background-color: #f0f0f0;
+  color: #000000;
+}
+
+body.dark-theme {
+  background-color: #333333;
+  color: #ffffff;
+}
+
+body.dark-theme button {
+  background-color: #555555;
+  color: #ffffff;
+}
+
+.fanfare {
+    width: 0;
+    height: 0;
+    border: 0;
+    overflow: hidden;
+}
+
+#audio-controls {
+    padding: 10px;
+}
+
+.volume-control {
+    font-size: 15px;
+}
+
+#quiz-container {
+    text-align: center;
+    font-size: 15px;
+}
+
+#quiz-container input {
+    padding: 10px;
+    font-size: 15px;
+}
+
+#submit-answer {
+    font-size: 15px;
+}
