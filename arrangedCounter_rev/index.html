@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Counter</title>
+    <link rel="stylesheet" type="text/css" href="./style.css">
+</head>
+<body>
+    <h1>10を目指せ!!!</h1>
+    <div class="counter">
+        <div id="congrats-message" style="display: none;">おめでとう!</div>
+        <div class="counter-number" id="js-counter">0</div>
+        <button type="button" class="button js-button" data-action="decrement">-</button>
+        <button type="button" class="button js-button" data-action="increment">+</button>
+        <button type="button" class="button" id="js-reset-button">Reset</button>
+    </div>
+
+    <audio id="fanfare" src="./bgm/fanfare.mp3"></audio>
+    <audio id="mario" src="./bgm/mario.mp3"></audio>
+
+    <div id="quiz-container" style="display: none;">
+        <p>現在再生中のBGMは何でしょう？ (カタカナ４文字)</p>
+        <input type="text" id="quiz-answer" maxlength="4" placeholder="例: ウィダー">
+        <button class="button" id="submit-answer">回答する</button>
+    </div>
+
+    <div id="audio-controls">
+        <button class="button" id="sound-toggle">音声オフ</button>
+        <label class="volume-control">
+            音量: <input type="range" id="volume-slider" min="0" max="1" step="0.1" value="0.5">
+        </label>
+    </div>
+    <audio class="bgm" id="bgm-1" src="./bgm/doraque.mp3" loop></audio>
+    <audio class="bgm" id="bgm-2" src="./bgm/kirby.mp3" loop></audio>
+    <audio class="bgm" id="bgm-3" src="./bgm/monhun.mp3" loop></audio>
+    <script type="module" src="main.js"></script>
+</body>
+</html>
