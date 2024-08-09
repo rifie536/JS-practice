@@ -1,8 +1,9 @@
-// main.js
 import { Counter } from './counter.js';
 import { AudioManager } from './audio.js';
 import { Quiz } from './quiz.js';
 import { ThemeManager } from './theme.js';
+
+// console.log('main.js is loaded');
 
 document.addEventListener('DOMContentLoaded', () => {
     const counterElement = document.getElementById("js-counter");
@@ -16,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const audioManager = new AudioManager();
     const themeManager = new ThemeManager(document.body);
-    
+
     const bgmAnswers = {
         "bgm-1": "ドラクエ",
         "bgm-2": "カービィ",
@@ -32,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
         updateDisplay(count);
     });
 
-    function updateDisplay(count) {
+    const updateDisplay = (count) => {
         checkAndToggleTheme(count);
         checkAndPlayFanfare(count);
         checkAndPlayBgm(count);
@@ -40,26 +41,28 @@ document.addEventListener('DOMContentLoaded', () => {
         checkAndShowCongrats(count);
     }
 
-    function checkAndToggleTheme(count) {
+    const checkAndToggleTheme = (count) => {
         if (count % 5 === 0 && count !== 0) {
             themeManager.toggleTheme();
         }
     }
 
-    function checkAndPlayFanfare(count) {
+    const checkAndPlayFanfare = (count) => {
+        if (counter.isResetMessage) return;
         if (count % 10 === 0 && count !== 0) {
+            console.log(count);
             audioManager.stopBgm();
             audioManager.playFanfare();
         }
     }
 
-    function checkAndPlayBgm(count) {
+    const checkAndPlayBgm = (count) => {
         if (count === 1) {
-            audioManager.playRandomBgm();
+            audioManager.playRandomBgm(volumeSlider.value);
         }
     }
 
-    function checkAndShowQuiz(count) {
+    const checkAndShowQuiz = (count) => {
         if (count === 9) {
             quiz.show(getBgmAnswer());
         } else {
@@ -67,38 +70,43 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    function checkAndShowCongrats(count) {
+    const checkAndShowCongrats = (count) => {
         congratsMessage.style.display = count === 10 ? "block" : "none";
     }
 
-    function getBgmAnswer() {
+    const getBgmAnswer = () => {
         return bgmAnswers[audioManager.getCurrentBgmId()] || "";
     }
 
-    // イベントリスナーの設定
     incrementButton.addEventListener("click", () => {
-        if (counter.getCount() < 10) {
+        if (counter.isResetMessage) return;
+        if (counter.getCount() < 9) {
             counter.increment();
+        } else if (counter.getCount() === 10) {
+            counter.showResetMessage();
         }
     });
 
     decrementButton.addEventListener("click", () => {
-        if (counter.getCount() > 0) {
+        if (counter.isResetMessage) return;
+        if (counter.getCount() > 0 && counter.getCount() < 10) {
             counter.decrement();
+        } else if (counter.getCount() === 10) {
+            counter.showResetMessage();
         }
     });
 
     resetButton.addEventListener("click", () => {
         counter.reset();
         quiz.hide();
-        audioManager.stopBgm();
+        audioManager.reset();
         themeManager.setLightTheme();
         congratsMessage.style.display = "none";
     });
 
     soundToggle.addEventListener("click", () => {
-        audioManager.toggleSound();
-        soundToggle.textContent = audioManager.isSoundEnabled() ? "音声オフ" : "音声オン";
+        let isSoundOn = audioManager.toggleSound(volumeSlider.value);
+        soundToggle.textContent = isSoundOn ? "音声オフ" : "音声オン";
     });
 
     volumeSlider.addEventListener("input", () => {
@@ -107,5 +115,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 初期化
     updateDisplay(counter.getCount());
-    audioManager.setVolume(volumeSlider.value);
+    // audioManager.setVolume(volumeSlider.value);
 });

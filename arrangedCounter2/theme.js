@@ -1,4 +1,3 @@
-// theme.js
 export class ThemeManager {
     constructor(body) {
         this.body = body;

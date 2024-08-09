@@ -1,9 +1,8 @@
-// quiz.js
 export class Quiz {
     constructor(container, onCorrectAnswer) {
         this.container = container;
-        this.answerInput = container.querySelector("#quiz-answer");
-        this.submitButton = container.querySelector("#submit-answer");
+        this.answerInput = document.getElementById("quiz-answer");
+        this.submitButton = document.getElementById("submit-answer");
         this.onCorrectAnswer = onCorrectAnswer;
         this.currentAnswer = "";
         this.isActive = false;

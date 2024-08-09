@@ -2,6 +2,7 @@ export class Counter {
     constructor(element, onCountChange) {
         this.element = element;
         this.count = 0;
+        this.isResetMessage = false;
         this.onCountChange = onCountChange;
     }
 
@@ -19,15 +20,29 @@ export class Counter {
         }
     }
 
+    showResetMessage() {
+        this.isResetMessage = true;
+        this.update();
+    }
+
     reset() {
         this.count = 0;
+        this.isResetMessage = false;
         this.update();
     }
 
     update() {
-        this.element.textContent = this.count;
+        if (this.isResetMessage) {
+            this.element.textContent = "リセットしてね🎶";
+        } else {
+            this.element.textContent = this.count;
+        }
         if (this.onCountChange) {
             this.onCountChange(this.count);
         }
+    }
+
+    getCount() {
+        return this.count;
     }
 }
