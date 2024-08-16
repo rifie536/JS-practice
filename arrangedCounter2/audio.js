@@ -7,6 +7,7 @@ export class AudioManager {
             document.getElementById("bgm-2"),
             document.getElementById("bgm-3")
         ];
+        this.bgmSources = {};
         this.currentBgm = null;
         this.isSoundEnabled = true;
         this.previousVolume = 0.5;
@@ -18,10 +19,22 @@ export class AudioManager {
         this.playMario();
     }
 
+    setFanfareSource(url) {
+        this.fanfare.src = url;
+    }
+
     playFanfare() {
         if (this.isSoundEnabled) {
             this.fanfare.currentTime = 0;
             this.fanfare.play();
+        }
+    }
+
+    setBgmSource(index, url) {
+        if (index >= 0 && index < this.bgmList.length) {
+            this.bgmList[index].src = url;
+        } else {
+            console.error(`Invalid BGM index: ${index}`);
         }
     }
 
@@ -33,6 +46,10 @@ export class AudioManager {
             this.currentBgm.volume = volume;
             this.currentBgm.play();
         }
+    }
+
+    setMarioSource(url) {
+        this.mario.src = url;
     }
 
     playMario() {

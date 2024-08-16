@@ -1,3 +1,39 @@
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: import.meta.env.VITE_API_KEY,
+  authDomain: import.meta.env.VITE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_APP_ID
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+
+// firebase storage から bgmデータを取得
+import { getStorage, ref, getDownloadURL } from "firebase/storage";
+
+const storage = getStorage();
+
+// Create a child reference
+const bgmRef = ref(storage, 'bgm');
+// imagesRef now points to 'images'
+
+// Child references can also take paths delimited by '/'
+const fanfareRef = ref(storage, 'bgm/fanfare.mp3');
+const marioRef = ref(storage, 'bgm/mario.mp3');
+const bgm1Ref = ref(storage, 'bgm/doraque.mp3');
+const bgm2Ref = ref(storage, 'bgm/kirby.mp3');
+const bgm3Ref = ref(storage, 'bgm/monhun.mp3');
+// spaceRef now points to "images/space.jpg"
+// imagesRef still points to "images"
+alert("音声が流れますので、ご注意ください。");
 import { Counter } from './counter.js';
 import { AudioManager } from './audio.js';
 import { Quiz } from './quiz.js';
@@ -16,6 +52,34 @@ document.addEventListener('DOMContentLoaded', () => {
     const resetButton = document.getElementById("js-reset-button");
 
     const audioManager = new AudioManager();
+    getDownloadURL(fanfareRef)
+        .then((url) => {
+            audioManager.setFanfareSource(url);
+        })
+        .catch((error) => {
+            console.error("ファンファーレの取得に失敗しました:", error);
+        });
+
+    getDownloadURL(marioRef)
+        .then((url) => {
+            audioManager.setMarioSource(url);
+        })
+        .catch((error) => {
+            console.error("マリオの取得に失敗しました:", error);
+        });
+
+    const bgmRefs = [bgm1Ref, bgm2Ref, bgm3Ref];
+
+    bgmRefs.forEach((ref, index) => {
+        getDownloadURL(ref)
+            .then((url) => {
+                audioManager.setBgmSource(index, url);
+            })
+            .catch((error) => {
+                console.error(`bgm${index + 1}の取得に失敗しました:`, error);
+            });
+    });
+
     const themeManager = new ThemeManager(document.body);
 
     const bgmAnswers = {
