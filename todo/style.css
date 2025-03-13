@@ -1,0 +1,80 @@
+body {
+    font-family: "Noto Sans JP", "Helvetica Neue", "Helvetica", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Arial", "Yu Gothic", "Meiryo", sans-serif;
+    color: #666;
+    box-sizing: border-box;
+    width: 400px;
+    margin: 0 auto;
+}
+
+input {
+    border-radius: 8px;
+    border: none;
+    padding: 6px 16px;
+    width: 300px;
+}
+
+button {
+    border-radius: 8px;
+    border: none;
+    padding: 4px 16px;
+    margin: 0 2px;
+}
+
+button:hover {
+    background-color: #0080ff;
+    color: #fff;
+    cursor: pointer;
+}
+
+.input-area {
+    background-color: #a3daff;
+    width: 400px;
+    height: 30px;
+    padding: 8px;
+    margin: 8px;
+    border-radius: 8px;
+}
+
+.incomplete-area {
+    border: 2px solid #a3daff;
+    width: 400px;
+    min-height: 200px;
+    padding: 8px;
+    margin: 8px;
+    border-radius: 8px;
+}
+
+.complete-area {
+    border: 2px solid #a3daff;
+    width: 400px;
+    min-height: 200px;
+    padding: 8px;
+    margin: 8px;
+    border-radius: 8px;
+    background-color: #1ec0ff;
+}
+
+.title {
+    text-align: center;
+    margin-top: 0;
+    font-weight: bold;
+}
+
+.list-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.list-row p {
+    width: 230px;
+}
+
+.button-row {
+    display: flex;
+    align-items: center;
+}
+
+.todo-item {
+    margin: 6px;
+}
